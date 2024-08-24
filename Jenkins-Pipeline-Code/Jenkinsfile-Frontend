@@ -4,7 +4,7 @@ pipeline {
         nodejs 'nodejs'
     }
     environment  {
-        SCANNER_HOME=tool 'Sonar-Scanner'
+        SCANNER_HOME=tool 'sonar-scanner'
         AWS_ACCOUNT_ID = credentials('Account_ID')
         AWS_ECR_REPO_NAME = credentials('ECR_REPO1')
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 dir('Application-Code/frontend') {
                     withSonarQubeEnv('sonar-server') {
-                        sh ''' $SCANNER_HOME/bin/Sonar-Scanner \
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectName=3-tier-frontend \
                         -Dsonar.projectKey=3-tier-frontend '''
                     }
