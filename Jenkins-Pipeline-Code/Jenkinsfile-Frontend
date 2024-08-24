@@ -94,7 +94,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'github-token', variable: 'github-token')]) {
                         sh '''
                             git config user.email "nagajyothi5b0@gmail.com"
-                            git config user.name "thotajyo"
+                            git config user.name "jyothi"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             sed -i "s#image:.*#image: $REPOSITORY_URI$AWS_ECR_REPO_NAME:$BUILD_NUMBER#g" deployment.yaml
