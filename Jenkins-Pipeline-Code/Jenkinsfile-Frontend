@@ -43,6 +43,7 @@ pipeline {
             steps {
                 dir('Application-Code/frontend') {
                     dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                    sh 'ls -l' // Verify report is generated
                     dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
