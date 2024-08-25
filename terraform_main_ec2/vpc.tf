@@ -55,7 +55,6 @@ resource "aws_route_table_association" "rt-association2" {
   subnet_id      = aws_subnet.public-subnet2.id
 }
 
-
 resource "aws_security_group" "security-group" {
   vpc_id      = aws_vpc.vpc.id
   description = "Allowing Jenkins, SonarQube, SSH, and other tools access"
