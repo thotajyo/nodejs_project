@@ -41,14 +41,14 @@ pipeline {
             }
         }
         stage('OWASP Dependency-Check Scan') {
-            steps {
-                dir('Application-Code/backend') {
-                    dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                    sh 'ls -l' // Verify report is generated
-                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+    steps {
+        dir('Application-Code/backend') {
+            dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --format XML --out .', odcInstallation: 'DP-Check'
+            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
         }
+
         stage('Trivy File Scan') {
             steps {
                 dir('Application-Code/backend') {
@@ -103,6 +103,7 @@ pipeline {
                             git add .
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                             git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+        
                         '''
                     }
                 }
@@ -110,3 +111,5 @@ pipeline {
         }
     }
 }
+     
+         
